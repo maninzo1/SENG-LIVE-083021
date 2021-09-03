@@ -64,3 +64,7 @@ function renderPokemon(pokemon) {
   pokeCard.append(pokeImg, pokeName, pokeLikes, likesNum, likeBttn, deleteBttn);
   pokeContainer.appendChild(pokeCard);
 }
+
+pokemons.forEach(function (pokemon) {
+  renderPokemon(pokemon);
+});
