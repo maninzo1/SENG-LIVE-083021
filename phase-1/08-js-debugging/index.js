@@ -1,7 +1,11 @@
+const pokemon = {name: "Pikachu"}
 const pokeContainer = document.getElementById("poke-container");
 const pokeForm = document.getElementById("poke-form");
+const pokeCard = document.getElementById('poke-1') // Console.log this
+// Can also use debugger here 
 
 function renderPokemon(pokemon) {
+  // Add a debugger here and investigate pokemon
   const pokeCard = document.createElement("div");
   pokeCard.id = `poke-${pokemon.id}`;
   pokeCard.className = "poke-card";
@@ -58,21 +62,20 @@ function deletePoke(card) {
   card.remove();
 }
 
-function getPokemons(){
-
-  fetch('http://localhost:3000/pokemons')
-  .then(function(response){
-    return response.json() 
-  }) 
-  .then(function(pokemonsArray){
-    pokemonsArray.forEach(function(pokemon){
-      renderPokemon(pokemon)
+function getPokemons() {
+  fetch("http://localhost:3000/pokemons")
+    .then(function (response) {
+      return response.json;
+    }
+    .then(function (pokemonsArray) {
+      pokemon.forEach(function (pokemon) {
+        renderPokemon(pokemon);
+      });
     })
-  })
 }
 
 function init() {
-  getPokemons()
+  getPokemons();
   pokeForm.addEventListener("submit", createPokemon);
 }
 
