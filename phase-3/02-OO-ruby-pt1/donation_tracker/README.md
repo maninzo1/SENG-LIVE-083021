@@ -46,3 +46,14 @@ class Donation
 
 end 
 ```
+
+- What can be done with a class? We can add methods that belong to each instance of the class, methods that belong to the class as a whole as well as data that belongs to each instance or the class as a whole. 
+
+#### Instances 
+
+- Once a class has been defined, we can now produce new objects (instances) from this class. 
+- To create a new `instance`, `.new` will be called on the class itself 
+
+```ruby
+new_donation = Donation.new
+```
