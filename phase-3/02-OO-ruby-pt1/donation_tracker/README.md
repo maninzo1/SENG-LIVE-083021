@@ -38,7 +38,8 @@
  - Outside of using prebuilt Ruby objects such as the ones listed above, we can also create our own custom ones.
  - To do so, we start by building a class. 
  - What is a class? A class is a blueprint that defines the way that each of its products will behave as well as what data will it contain
- - Let's create a class for donations:
+ 
+ Let's create a class for donations:
 
 ```ruby
 class Donation
