@@ -59,6 +59,7 @@ end
 new_donation = Donation.new
 ```
 - Each instance is unique to another instance. 
+- Instances also come with their own pre-built methods, or we can define our own. Try: `new_donation.methods`
 
 ```ruby
 first_donation = Donation.new
@@ -83,5 +84,10 @@ class Donation
     end 
 end 
 
+binding.pry
+ 
+ # inside the pry console run: Donation.new
+
 ```
 
+- Here we can see 'inside initialize' automatically printed upon the `.new` method invokation. 
