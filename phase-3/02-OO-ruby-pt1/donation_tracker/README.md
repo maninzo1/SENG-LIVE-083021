@@ -66,3 +66,22 @@ second_donation = Donation.new
 
 first_donation == second donation
 ```
+
+#### Initialize
+
+- The initialize method will be automatically invoked in response to the `.new` method
+- This is a place to set any initial data or actions upon instantiating a new object. A set of rules executed upon the creation of an instance.
+- We do not have to explicility invoke initialize methods.
+
+try:
+
+```ruby
+
+class Donation 
+    def initialize
+        puts "inside initialize"
+    end 
+end 
+
+```
+
