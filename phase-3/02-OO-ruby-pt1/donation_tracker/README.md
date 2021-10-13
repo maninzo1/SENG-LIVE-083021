@@ -87,7 +87,24 @@ end
 binding.pry
  
  # inside the pry console run: Donation.new
+ # Here we can see 'inside initialize' automatically printed upon the `.new` method invokation. 
 
 ```
 
-- Here we can see 'inside initialize' automatically printed upon the `.new` method invokation. 
+#### Instance variables
+
+- The way we can attach bits of data about each instance to itself
+- Instance variables are attached to the instance itself! It becomes the instances property. 
+
+```ruby
+class Donation
+    def initialize(organization, amount, date)
+        @organization = organization
+        @amount = amount
+        @date = date
+    end 
+end 
+
+donation = Donation.new('American Heart Association', 100.00, Time.now)
+binding.pry
+```
