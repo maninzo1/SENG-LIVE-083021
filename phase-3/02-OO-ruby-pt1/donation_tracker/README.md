@@ -107,4 +107,49 @@ end
 
 donation = Donation.new('American Heart Association', 100.00, Time.now)
 binding.pry
+
+# Now try to run: donation.organization
+# What was the result of this execution and why did it happen?
+```
+#### Instance Methods
+
+- These are methods, or messages, that are sent to the instance the method is being called on. 
+- To read the values of our instances properties, we will want to create 2 particular instance methods, a setter and getter. 
+
+#### Setter and Getter methods
+
+- Although we can instantiate a new object with some initial data through the initialize method, we need a way to read that data as well as update. 
+- Setter method will allow us to update the value of an instance variable/property
+- Getter method will allow to read the value of an instance variable/property 
+
+To fix the error we received previously when running `donation.organization`, let's create a getter method.
+
+```ruby
+
+def organization
+    @organization
+end 
+
+```
+
+- This method is simply returning the value of the instance variable we set on the donation instance. 
+
+Next let's create a method that would allow us to update the value of an instance variable, the setter:
+
+```ruby
+
+def organization=(organization)
+    @organization = organization
+end 
+
+```
+
+- Here the `=` sign serves no functional purpose, it is just a convential syntax for identifying a setter method. 
+
+Let's update the organization for our donation instance
+
+```ruby
+
+donation.organization = "Kidney Foundation"
+
 ```
