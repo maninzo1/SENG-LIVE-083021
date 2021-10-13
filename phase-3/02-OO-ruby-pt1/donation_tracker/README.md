@@ -153,3 +153,14 @@ Let's update the organization for our donation instance
 donation.organization = "Kidney Foundation"
 
 ```
+
+#### Attr Macros
+
+- Writing out setter and getter methods for each attribute can potentially create a lot of lines of code. 
+- We can use macros!!!  
+
+```ruby
+attr_accessor :organization, :amount, :date
+```
+
+- This one line of code will create both a setter and getter method for each provided argument.
