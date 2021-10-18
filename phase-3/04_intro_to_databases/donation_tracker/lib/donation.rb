@@ -3,29 +3,17 @@ class Donation
     attr_accessor :amount, :date, :organization_id 
     attr_reader :id
 
-    # attr_accessor is creating these two methods:
-    # def amount 
-    #     @amount 
-    # end 
-
-    # def amount=(amount)
-    #     @amount = amount 
-    # end 
-    
     def initialize(attributes) 
-        attributes.each do |key, value| # malware
+        attributes.each do |key, value| 
             binding.pry
-            if self.respond_to?("#{key.to_s}=") # amount=
-                self.send("#{key.to_s}=", value) # this is invoking the setter method for the key
+            if self.respond_to?("#{key.to_s}=") 
+                self.send("#{key.to_s}=", value) 
             end 
         end
 
     end
 
-    # 1st step: create a ruby object for donations
-    # 2nd step: save that ruby object as a DB record
-
-    def save # .save
+    def save
         if self.id
             self.update
         else 
@@ -36,7 +24,7 @@ class Donation
             DB.execute(sql, self.amount, self.date, self.organization_id)
             @id = DB.last_insert_row_id
         end 
-        self # instance 
+        self 
     end
 
     def update 
@@ -56,7 +44,7 @@ class Donation
         end
     end
 
-    def self.create_table # create_table 
+    def self.create_table 
         sql = <<-SQL
         CREATE TABLE IF NOT EXISTS donations (
             id INTEGER PRIMARY KEY, 
@@ -66,7 +54,6 @@ class Donation
         );
         SQL
         DB.execute(sql)
-        # DB[:conn].execute(sql)
     end 
 
     def name 
@@ -74,10 +61,3 @@ class Donation
     end 
 
 end 
-
-
-# invoke upon the initializ method
-donation = Donation.new(amount: 100, date: 101421, organization_id: 1)
-
-# save the ruby object as a db record
-donation.save
