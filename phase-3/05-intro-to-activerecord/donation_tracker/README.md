@@ -1,6 +1,7 @@
 # Intro to Active Record
 
-### Lecture Deliverables
+### Lecture Objectives
+
 - Demonstrate how to use rake and Active Record to build classes, instances, and tables using a One to Many relationship
 - Demonstrate the benefits of an ORM
 - Demonstrate how to use Active Record to query a database
