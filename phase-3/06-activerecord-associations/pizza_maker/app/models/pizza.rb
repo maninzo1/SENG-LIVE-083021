@@ -1,4 +1,3 @@
-class Pizza
-
+class Pizza < ActiveRecord::Base
 end 
 

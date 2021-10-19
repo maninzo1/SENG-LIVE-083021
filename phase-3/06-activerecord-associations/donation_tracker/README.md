@@ -15,22 +15,8 @@
 - A donor will have a name attribute
 - Set up associations between Donor, Donations, and Organization
 - Modify the Donations table to reflect the newly defined associations with a foreign key column.
-- 
 
 ### Association Macros 
 - has_many
 - belongs_to
 - has many, through 
-
-
-
-
-
-donors has many donations
-donors has many organizations through donors 
-
-organization has many donations
-organization has many donors through donations 
-
-donations belongs to organization
-donation belongs to donor 
