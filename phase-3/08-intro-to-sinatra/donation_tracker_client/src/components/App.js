@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 
 function App() {
 
-  const [donations, setDonations] = useState([]);
+  const [organizations, setOrganizations] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9292/donations")
+    fetch("http://localhost:9292/organizations")
       .then((r) => r.json())
-      .then((donations) => setDonations(donations));
+      .then((organizations) => console.log(organizations));
   }, []);
 
   return (
     <div className="App">
+      Donation Tracker!
     </div>
   );
 }

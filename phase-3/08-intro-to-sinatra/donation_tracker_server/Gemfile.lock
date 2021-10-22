@@ -29,6 +29,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.1.0)
       rack
     rake (13.0.6)
@@ -72,6 +74,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   pry
+  rack-cors
   rake
   require_all
   rerun
