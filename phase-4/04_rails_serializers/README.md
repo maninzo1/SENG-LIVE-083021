@@ -15,7 +15,7 @@ Today's focus:
 
 ## Necessary configuration for AMS (ActiveModel Serializers)
 
-```
+```bash
 bundle add active_model_serializers
 ```
 Make sure when you do this that you don't already have a running rails server!
@@ -30,11 +30,12 @@ PostSerializer
 # any additional configuration
 ```
 
-If we want to have two different serializers for the same model in different situations (index vs show for example) we can specify which serializer should be used explicitly:
+If we want to have two different serializers for the same model in different situations (index vs show for example) we can specify which serializer should be used explicitly.
+The option for overriding the default serializer for a collection is called `each_serializer` while it's called `serializer` for a single record.
 
 ```rb
 def index
-  render json: Post.all, serializer: 'PostIndexSerializer'
+  render json: Post.all, each_serializer: PostIndexSerializer
 end
 
 def show
@@ -43,7 +44,7 @@ end
 ```
 We'll also want to use the serializer generator to make serializers for our model objects.
 
-```
+```bash
 rails g serializer PostIndex id title author_name
 rails g serializer Post
 ```
@@ -64,6 +65,37 @@ end
 
 This will allow us to include the comments when we retrieve a post from the api using its id, while leaving them out when we retrieve all of the posts from the index endpoint.
 
+We can also approach the same problem from the other direction:
+
+```bash
+rails g serializer Post id title author_name
+rails g serializer PostDetail
+```
+
+```rb
+class PostSerializer < ActiveModel::Serializer
+  attributes :id, :title, :author_name
+end
+
+class PostDetailSerializer < PostSerializer
+  has_many :comments
+end
+```
+
+And then in the controller:
+
+```rb
+def index
+  render json: Post.all
+end
+
+def show
+  render json: Post.find(params[:id]), serializer: PostDetailSerializer
+end
+```
+
+This way is preferable as we don't have to use the `each_serializer` option and the default serializer for our models will be the most basic (requiring us to explicitly specify a serializer if we want *more* information rather than *less*)
+
 ## Leave Group/Join Group Button on Groups Index view
 
 <details>
@@ -72,7 +104,13 @@ This will allow us to include the comments when we retrieve a post from the api 
   </summary>
   <hr/>
 
-  GET '/groups', to: groups#index
+  ```rb
+  get '/groups', to: 'groups#index'
+  ```
+  --- or ---
+  ```rb
+  resources :groups, only: [:index]
+  ```
 
   <hr/>
 
@@ -122,7 +160,16 @@ This will allow us to include the comments when we retrieve a post from the api 
   </summary>
   <hr/>
 
-  GET '/groups/:id', to: groups#show
+  ```rb
+  GET '/groups/:id', to: 'groups#show'
+  ```
+  --- or ---
+
+  ```rb
+  resources :groups, only: [:show]
+  ```
+
+
 
   <hr/>
 
@@ -149,8 +196,8 @@ This will allow us to include the comments when we retrieve a post from the api 
   </summary>
   <hr/>
 
-  - has_many :members
-  - has_many :events
+  - `has_many :members`
+  - `has_many :events`
   >note: I don't need to add through in the serializer even though the group has many members through user_groups
 
   <hr/>
@@ -167,7 +214,13 @@ This will allow us to include the comments when we retrieve a post from the api 
   </summary>
   <hr/>
 
-  GET '/events', to: events#index
+  ```rb
+  get '/events', to: 'events#index'
+  ```
+  --- or ---
+  ```rb
+  resources :events, only: [:index]
+  ```
 
   <hr/>
 
@@ -220,8 +273,14 @@ This will allow us to include the comments when we retrieve a post from the api 
     Which endpoint am I hitting to retrieve data for this view?
   </summary>
   <hr/>
-
-  GET '/events/:id', to: events#show
+  
+  ```rb
+  get '/events/:id', to: 'events#show'
+  ```
+  --- or ---
+  ```rb
+  resources :events, only: [:show]
+  ```
 
   <hr/>
 
